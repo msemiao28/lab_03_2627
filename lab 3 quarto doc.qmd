@@ -3,6 +3,7 @@ title: "lab 3 quarto"
 format: html
 editor: visual
 ---
+
 ```{r}
 
 library(tidyverse)
@@ -47,5 +48,9 @@ ggplot(bond.data, aes(x=BJB, y=US_Adj)) +
 # It seems the movies earn more if he says it 0 or 2 times?
 # Probably a spurious correlation!
 
-# 
+# Martinis against US_Adj
+ggplot(bond.data, aes(x=Martinis, y=US_Adj)) +
+    geom_point() +
+    scale_color_continuous()
+
 ```
