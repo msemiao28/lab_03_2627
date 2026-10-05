@@ -14,15 +14,20 @@ bond.data
 
 Which movie earned the most?
 ```{r}
-bond.data |>
+#| cache: true
+#| echo: false
+#| outpur: false
+profitable <- bond.data |>
     select(Year, Movie, US_Gross) |>
     arrange(desc(US_Gross))
+profitable
 ```
-The most profitable movie was Skyfall, made in 2012. It made a profit of about $300 million.
+The most profitable movie was `r profitable$Movie[1]`, made in 2012. It made a profit of about $300 million.
 
 
 Is there a correlation between budget and earnings?
 ```{r}
+#| error: true
 ggplot(bond.data, aes(x=Budget, y=US_Gross)) +
     geom_point()
 ```
@@ -45,14 +50,15 @@ Still seems budget is increasing with year even after inflation adjustment, but 
 
 Just for fun: is there a correlation between the number of times Bond says "Bond, James Bond" and return??
 ```{r}
-ggplot(bond.data, aes(x=BJB, y=US_Adj)) +
+says_bond <- ggplot(bond.data, aes(x=BJB, y=US_Adj)) +
     geom_point() +
     scale_color_continuous()
+says_bond
 ```
 It seems the movies earn more if he says it 0 or 2 times?
 Probably a spurious correlation!
 
-Martinis against US_Adj
+#Martinis against US_Adj
 ```{r}
 ggplot(bond.data, aes(x=Martinis, y=US_Adj)) +
     geom_point() +
